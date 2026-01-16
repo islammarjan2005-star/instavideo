@@ -59,30 +59,35 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 500;
             color: #555;
             font-size: 14px;
         }
 
-        .form-group textarea {
+        .form-group textarea,
+        .form-group input[type="text"] {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 14px;
             font-family: inherit;
-            resize: vertical;
-            min-height: 80px;
             transition: border-color 0.2s;
         }
 
-        .form-group textarea:focus {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .form-group textarea:focus,
+        .form-group input[type="text"]:focus {
             outline: none;
             border-color: #1d9bf0;
         }
@@ -95,14 +100,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: #1d9bf0;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
@@ -112,16 +117,42 @@
             background: #1a8cd8;
         }
 
+        .upload-btn.secondary {
+            background: #536471;
+        }
+
+        .upload-btn.secondary:hover {
+            background: #45535e;
+        }
+
         .upload-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
 
         .file-name {
-            margin-top: 8px;
-            font-size: 13px;
+            margin-top: 6px;
+            font-size: 12px;
             color: #666;
             text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
         }
 
         .preview-section {
@@ -141,7 +172,7 @@
         .reel-template {
             width: 338px;
             height: 600px;
-            background: #f7f9fa;
+            background: white;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
@@ -150,26 +181,42 @@
         }
 
         .reel-content {
-            background: white;
-            padding: 14px;
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .top-section {
+            width: 100%;
+            margin-bottom: auto;
+            padding-top: 10px;
+        }
+
+        .center-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .account-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
+            width: 100%;
         }
 
         .account-logo {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
+            background: #e0e0e0;
         }
 
         .account-logo img {
@@ -187,7 +234,7 @@
         .account-name {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             font-weight: 700;
             font-size: 15px;
             color: #0f1419;
@@ -197,7 +244,12 @@
         .verified-badge {
             width: 18px;
             height: 18px;
-            margin-left: 1px;
+            margin-left: 2px;
+            display: none;
+        }
+
+        .verified-badge.show {
+            display: inline-block;
         }
 
         .account-handle {
@@ -208,17 +260,12 @@
 
         .caption {
             font-size: 15px;
-            line-height: 1.35;
+            line-height: 1.4;
             color: #0f1419;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             word-wrap: break-word;
             letter-spacing: -0.1px;
-        }
-
-        .video-wrapper {
-            flex: 1;
-            display: flex;
-            align-items: flex-start;
+            width: 100%;
         }
 
         .video-container {
@@ -253,13 +300,93 @@
 
         .video-placeholder p {
             font-size: 13px;
+            color: #aaa;
+        }
+
+        .bottom-section {
+            margin-top: auto;
+            height: 20px;
+        }
+
+        .download-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 200, 83, 0.4);
+        }
+
+        .download-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar.show {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+            border-radius: 4px;
+            transition: width 0.1s;
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .progress-text.show {
+            display: block;
         }
 
         .tips {
             background: rgba(255,255,255,0.1);
             border-radius: 8px;
-            padding: 16px;
-            margin-top: 20px;
+            padding: 14px;
+            margin-top: 16px;
             width: 100%;
             max-width: 338px;
         }
@@ -267,7 +394,7 @@
         .tips h3 {
             color: white;
             font-size: 13px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
         }
 
@@ -278,26 +405,18 @@
         }
 
         .tips li {
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
-        .download-section {
-            margin-top: 20px;
-            padding-top: 20px;
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .divider {
             border-top: 1px solid #e0e0e0;
-        }
-
-        .download-info {
-            background: #f0f7ff;
-            border: 1px solid #b3d4fc;
-            border-radius: 8px;
-            padding: 12px;
-        }
-
-        .download-info p {
-            font-size: 13px;
-            color: #1e40af;
-            line-height: 1.5;
+            margin: 16px 0;
         }
     </style>
 </head>
@@ -318,110 +437,360 @@
                 <input type="file" id="videoInput" accept="video/*">
                 <button class="upload-btn" onclick="document.getElementById('videoInput').click()">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+                        <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
                     </svg>
-                    Choose Video File
+                    Choose Video
                 </button>
-                <div class="file-name" id="fileName">No file selected</div>
+                <div class="file-name" id="videoFileName">No video selected</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" id="accountName" value="United Sector">
+                </div>
+                <div class="form-group">
+                    <label for="accountHandle">Handle</label>
+                    <input type="text" id="accountHandle" value="@utdsectorx">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <input type="file" id="logoInput" accept="image/*">
+                <button class="upload-btn secondary" onclick="document.getElementById('logoInput').click()">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    Choose Logo
+                </button>
+                <div class="file-name" id="logoFileName">Using default logo</div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="showVerified" checked>
+                <label for="showVerified">Show verified badge</label>
             </div>
 
             <div class="download-section">
-                <div class="download-info">
-                    <p><strong>How to save:</strong> Screen record the preview while the video plays. On iPhone: Control Center > Screen Recording. On Android: Use built-in screen recorder.</p>
+                <button class="download-btn" id="downloadBtn" onclick="startRecording()">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                    Download Video
+                </button>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
+                <div class="progress-text" id="progressText">Recording: 0%</div>
             </div>
         </div>
 
         <div class="preview-section">
-            <h2>Preview (9:16 TikTok/Reels)</h2>
+            <h2>Preview (9:16)</h2>
 
             <div class="reel-template" id="reelTemplate">
                 <div class="reel-content">
-                    <div class="account-header">
-                        <div class="account-logo">
-                            <img src="IMG_2141.jpeg" alt="United Sector">
-                        </div>
-                        <div class="account-info">
-                            <div class="account-name">
-                                United Sector
-                                <svg class="verified-badge" viewBox="0 0 22 22" fill="none">
-                                    <circle cx="11" cy="11" r="11" fill="#1d9bf0"/>
-                                    <path d="M9.5 12.5L7.5 10.5L6.5 11.5L9.5 14.5L15.5 8.5L14.5 7.5L9.5 12.5Z" fill="white"/>
-                                </svg>
+                    <div class="top-section"></div>
+
+                    <div class="center-section">
+                        <div class="account-header">
+                            <div class="account-logo">
+                                <img id="logoPreview" src="IMG_2141.jpeg" alt="Logo">
                             </div>
-                            <div class="account-handle">@utdsectorx</div>
+                            <div class="account-info">
+                                <div class="account-name">
+                                    <span id="namePreview">United Sector</span>
+                                    <svg class="verified-badge show" id="verifiedBadge" viewBox="0 0 22 22" fill="none">
+                                        <circle cx="11" cy="11" r="11" fill="#1d9bf0"/>
+                                        <path d="M9.5 12.5L7.5 10.5L6.5 11.5L9.5 14.5L15.5 8.5L14.5 7.5L9.5 12.5Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                <div class="account-handle" id="handlePreview">@utdsectorx</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="caption" id="captionPreview">Bruno giving his wisdom to Shea Lacey</div>
+                        <div class="caption" id="captionPreview">Bruno giving his wisdom to Shea Lacey</div>
 
-                    <div class="video-wrapper">
                         <div class="video-container" id="videoContainer">
                             <div class="video-placeholder" id="videoPlaceholder">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
                                 </svg>
-                                <p>Upload a video to preview</p>
+                                <p>Upload a video</p>
                             </div>
                             <video id="videoPreview" style="display: none;" loop muted playsinline></video>
                         </div>
                     </div>
+
+                    <div class="bottom-section"></div>
                 </div>
             </div>
 
             <div class="tips">
                 <h3>Tips:</h3>
                 <ul>
-                    <li>Best format: MP4, square (1:1) video</li>
-                    <li>Template is 9:16 with square video inside</li>
-                    <li>Screen record for best export quality</li>
+                    <li>Upload a square (1:1) video for best results</li>
+                    <li>Click Download to export as MP4</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <script>
-        // Caption input handler
+        // Elements
         const captionInput = document.getElementById('caption');
         const captionPreview = document.getElementById('captionPreview');
-
-        captionInput.addEventListener('input', function() {
-            captionPreview.textContent = this.value || 'Your caption here...';
-        });
-
-        // Video input handler
+        const accountNameInput = document.getElementById('accountName');
+        const namePreview = document.getElementById('namePreview');
+        const accountHandleInput = document.getElementById('accountHandle');
+        const handlePreview = document.getElementById('handlePreview');
+        const showVerifiedCheckbox = document.getElementById('showVerified');
+        const verifiedBadge = document.getElementById('verifiedBadge');
         const videoInput = document.getElementById('videoInput');
         const videoPreview = document.getElementById('videoPreview');
         const videoPlaceholder = document.getElementById('videoPlaceholder');
-        const fileName = document.getElementById('fileName');
+        const videoFileName = document.getElementById('videoFileName');
+        const logoInput = document.getElementById('logoInput');
+        const logoPreview = document.getElementById('logoPreview');
+        const logoFileName = document.getElementById('logoFileName');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
 
-        videoInput.addEventListener('change', function(e) {
+        // Caption handler
+        captionInput.addEventListener('input', () => {
+            captionPreview.textContent = captionInput.value || 'Your caption here...';
+        });
+
+        // Account name handler
+        accountNameInput.addEventListener('input', () => {
+            namePreview.textContent = accountNameInput.value || 'Account Name';
+        });
+
+        // Handle handler
+        accountHandleInput.addEventListener('input', () => {
+            handlePreview.textContent = accountHandleInput.value || '@handle';
+        });
+
+        // Verified badge toggle
+        showVerifiedCheckbox.addEventListener('change', () => {
+            verifiedBadge.classList.toggle('show', showVerifiedCheckbox.checked);
+        });
+
+        // Video upload handler
+        videoInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                fileName.textContent = file.name;
-
+                videoFileName.textContent = file.name;
                 const url = URL.createObjectURL(file);
                 videoPreview.src = url;
                 videoPreview.style.display = 'block';
                 videoPlaceholder.style.display = 'none';
+                videoPreview.onloadeddata = () => videoPreview.play();
+            }
+        });
 
-                videoPreview.onloadeddata = function() {
-                    videoPreview.play();
-                };
+        // Logo upload handler
+        logoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                logoFileName.textContent = file.name;
+                const url = URL.createObjectURL(file);
+                logoPreview.src = url;
             }
         });
 
         // Click video to play/pause
-        const videoContainer = document.getElementById('videoContainer');
-        videoContainer.addEventListener('click', function() {
+        document.getElementById('videoContainer').addEventListener('click', () => {
             if (videoPreview.src && videoPreview.style.display !== 'none') {
-                if (videoPreview.paused) {
-                    videoPreview.play();
-                } else {
-                    videoPreview.pause();
-                }
+                videoPreview.paused ? videoPreview.play() : videoPreview.pause();
             }
         });
+
+        // Recording functionality
+        let isRecording = false;
+
+        async function startRecording() {
+            if (!videoPreview.src || videoPreview.style.display === 'none') {
+                alert('Please upload a video first!');
+                return;
+            }
+
+            if (isRecording) return;
+            isRecording = true;
+
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" style="animation: spin 1s linear infinite;"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> Recording...';
+            progressBar.classList.add('show');
+            progressText.classList.add('show');
+
+            // Reset video to start
+            videoPreview.currentTime = 0;
+            videoPreview.play();
+
+            const template = document.getElementById('reelTemplate');
+            const canvas = document.createElement('canvas');
+            canvas.width = 1080;
+            canvas.height = 1920;
+            const ctx = canvas.getContext('2d');
+
+            const stream = canvas.captureStream(30);
+            const mediaRecorder = new MediaRecorder(stream, {
+                mimeType: 'video/webm;codecs=vp9',
+                videoBitsPerSecond: 8000000
+            });
+
+            const chunks = [];
+            mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'reel_' + Date.now() + '.webm';
+                a.click();
+                URL.revokeObjectURL(url);
+
+                isRecording = false;
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download Video';
+                progressBar.classList.remove('show');
+                progressText.classList.remove('show');
+                progressFill.style.width = '0%';
+            };
+
+            mediaRecorder.start();
+
+            const duration = videoPreview.duration * 1000;
+            const startTime = Date.now();
+
+            function drawFrame() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration * 100, 100);
+                progressFill.style.width = progress + '%';
+                progressText.textContent = 'Recording: ' + Math.round(progress) + '%';
+
+                // Clear canvas
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, 1080, 1920);
+
+                // Scale factor
+                const scale = 1080 / 338;
+
+                // Draw account header area
+                const headerY = 380;
+
+                // Draw logo (circular)
+                const logoSize = 44 * scale;
+                const logoX = 60;
+                const logoY = headerY;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(logoX + logoSize/2, logoY + logoSize/2, logoSize/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                ctx.drawImage(logoPreview, logoX, logoY, logoSize, logoSize);
+                ctx.restore();
+
+                // Draw account name
+                ctx.fillStyle = '#0f1419';
+                ctx.font = 'bold ' + (15 * scale) + 'px Inter, sans-serif';
+                const nameX = logoX + logoSize + 30;
+                ctx.fillText(namePreview.textContent, nameX, headerY + 28 * scale);
+
+                // Draw verified badge if enabled
+                if (showVerifiedCheckbox.checked) {
+                    const badgeX = nameX + ctx.measureText(namePreview.textContent).width + 10;
+                    const badgeY = headerY + 8 * scale;
+                    const badgeSize = 18 * scale;
+
+                    ctx.fillStyle = '#1d9bf0';
+                    ctx.beginPath();
+                    ctx.arc(badgeX + badgeSize/2, badgeY + badgeSize/2, badgeSize/2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold ' + (14 * scale) + 'px sans-serif';
+                    ctx.fillText('✓', badgeX + badgeSize * 0.25, badgeY + badgeSize * 0.72);
+                }
+
+                // Draw handle
+                ctx.fillStyle = '#536471';
+                ctx.font = (14 * scale) + 'px Inter, sans-serif';
+                ctx.fillText(handlePreview.textContent, nameX, headerY + 52 * scale);
+
+                // Draw caption
+                ctx.fillStyle = '#0f1419';
+                ctx.font = (15 * scale) + 'px Inter, sans-serif';
+                const captionY = headerY + logoSize + 45;
+                const maxWidth = 1080 - 120;
+                wrapText(ctx, captionPreview.textContent, 60, captionY, maxWidth, 22 * scale);
+
+                // Draw video (centered square)
+                const videoSize = 298 * scale;
+                const videoX = (1080 - videoSize) / 2;
+                const videoY = 750;
+
+                // Rounded rectangle clip for video
+                const radius = 16 * scale;
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(videoX + radius, videoY);
+                ctx.lineTo(videoX + videoSize - radius, videoY);
+                ctx.quadraticCurveTo(videoX + videoSize, videoY, videoX + videoSize, videoY + radius);
+                ctx.lineTo(videoX + videoSize, videoY + videoSize - radius);
+                ctx.quadraticCurveTo(videoX + videoSize, videoY + videoSize, videoX + videoSize - radius, videoY + videoSize);
+                ctx.lineTo(videoX + radius, videoY + videoSize);
+                ctx.quadraticCurveTo(videoX, videoY + videoSize, videoX, videoY + videoSize - radius);
+                ctx.lineTo(videoX, videoY + radius);
+                ctx.quadraticCurveTo(videoX, videoY, videoX + radius, videoY);
+                ctx.closePath();
+                ctx.clip();
+
+                ctx.drawImage(videoPreview, videoX, videoY, videoSize, videoSize);
+                ctx.restore();
+
+                if (elapsed < duration) {
+                    requestAnimationFrame(drawFrame);
+                } else {
+                    mediaRecorder.stop();
+                }
+            }
+
+            function wrapText(context, text, x, y, maxWidth, lineHeight) {
+                const words = text.split(' ');
+                let line = '';
+                let currentY = y;
+
+                for (let n = 0; n < words.length; n++) {
+                    const testLine = line + words[n] + ' ';
+                    const metrics = context.measureText(testLine);
+                    if (metrics.width > maxWidth && n > 0) {
+                        context.fillText(line, x, currentY);
+                        line = words[n] + ' ';
+                        currentY += lineHeight;
+                    } else {
+                        line = testLine;
+                    }
+                }
+                context.fillText(line, x, currentY);
+            }
+
+            drawFrame();
+        }
     </script>
+
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </body>
 </html>
