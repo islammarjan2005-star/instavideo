@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram Reel Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,8 +15,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -23,11 +26,11 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 40px;
             align-items: start;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
             .container {
                 grid-template-columns: 1fr;
             }
@@ -37,21 +40,22 @@
             text-align: center;
             color: white;
             margin-bottom: 30px;
-            font-size: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-size: 1.8rem;
+            font-weight: 700;
         }
 
         .controls {
             background: white;
             border-radius: 16px;
             padding: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         .controls h2 {
             margin-bottom: 20px;
             color: #333;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .form-group {
@@ -61,8 +65,9 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 500;
             color: #555;
+            font-size: 14px;
         }
 
         .form-group textarea {
@@ -70,7 +75,7 @@
             padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-family: inherit;
             resize: vertical;
             min-height: 80px;
@@ -79,7 +84,7 @@
 
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #1d9bf0;
         }
 
         .form-group input[type="file"] {
@@ -92,20 +97,19 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 14px;
+            background: #1d9bf0;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: background 0.2s;
         }
 
         .upload-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            background: #1a8cd8;
         }
 
         .upload-btn svg {
@@ -115,104 +119,117 @@
 
         .file-name {
             margin-top: 8px;
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
             text-align: center;
         }
 
         .preview-section {
-            position: sticky;
-            top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .preview-section h2 {
             color: white;
             margin-bottom: 16px;
-            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        /* The Instagram Reel Template */
+        /* 9:16 TikTok/Reels Template */
         .reel-template {
-            background: #f5f5f5;
+            width: 338px;
+            height: 600px;
+            background: #f7f9fa;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            max-width: 400px;
-            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
         }
 
         .reel-content {
             background: white;
-            padding: 16px 16px 0 16px;
+            padding: 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .account-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .account-logo {
-            width: 44px;
-            height: 44px;
-            background: #d42626;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
             flex-shrink: 0;
         }
 
-        .account-logo span {
-            color: white;
-            font-weight: 800;
-            font-size: 16px;
-            letter-spacing: -1px;
+        .account-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .account-info {
             display: flex;
             flex-direction: column;
+            gap: 1px;
         }
 
         .account-name {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             font-weight: 700;
             font-size: 15px;
-            color: #000;
+            color: #0f1419;
+            letter-spacing: -0.2px;
         }
 
         .verified-badge {
-            width: 16px;
-            height: 16px;
-            fill: #1d9bf0;
+            width: 18px;
+            height: 18px;
+            margin-left: 1px;
         }
 
         .account-handle {
             color: #536471;
             font-size: 14px;
+            font-weight: 400;
         }
 
         .caption {
             font-size: 15px;
-            line-height: 1.4;
+            line-height: 1.35;
             color: #0f1419;
             margin-bottom: 12px;
             word-wrap: break-word;
+            letter-spacing: -0.1px;
+        }
+
+        .video-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
         }
 
         .video-container {
-            background: #000;
+            width: 100%;
             aspect-ratio: 1/1;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            border-radius: 12px;
-            margin-bottom: 16px;
         }
 
         .video-container video {
@@ -224,14 +241,18 @@
         .video-placeholder {
             color: #666;
             text-align: center;
-            padding: 40px;
+            padding: 30px;
         }
 
         .video-placeholder svg {
-            width: 60px;
-            height: 60px;
-            fill: #999;
-            margin-bottom: 12px;
+            width: 50px;
+            height: 50px;
+            fill: #888;
+            margin-bottom: 10px;
+        }
+
+        .video-placeholder p {
+            font-size: 13px;
         }
 
         .tips {
@@ -239,18 +260,21 @@
             border-radius: 8px;
             padding: 16px;
             margin-top: 20px;
+            width: 100%;
+            max-width: 338px;
         }
 
         .tips h3 {
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .tips ul {
             color: rgba(255,255,255,0.8);
-            font-size: 13px;
-            padding-left: 20px;
+            font-size: 12px;
+            padding-left: 18px;
         }
 
         .tips li {
@@ -268,47 +292,12 @@
             border: 1px solid #b3d4fc;
             border-radius: 8px;
             padding: 12px;
-            margin-bottom: 16px;
         }
 
         .download-info p {
             font-size: 13px;
             color: #1e40af;
             line-height: 1.5;
-        }
-
-        .record-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 16px;
-            background: #e53935;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .record-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(229, 57, 53, 0.4);
-        }
-
-        .record-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .record-btn svg {
-            width: 20px;
-            height: 20px;
         }
     </style>
 </head>
@@ -338,25 +327,26 @@
 
             <div class="download-section">
                 <div class="download-info">
-                    <p><strong>How to save:</strong> Use your device's screen recording feature to capture the preview while the video plays. On iPhone, use Control Center > Screen Recording. On Android, use built-in screen recorder or a third-party app.</p>
+                    <p><strong>How to save:</strong> Screen record the preview while the video plays. On iPhone: Control Center > Screen Recording. On Android: Use built-in screen recorder.</p>
                 </div>
             </div>
         </div>
 
         <div class="preview-section">
-            <h2>Preview</h2>
+            <h2>Preview (9:16 TikTok/Reels)</h2>
 
             <div class="reel-template" id="reelTemplate">
                 <div class="reel-content">
                     <div class="account-header">
                         <div class="account-logo">
-                            <span>US</span>
+                            <img src="IMG_2141.jpeg" alt="United Sector">
                         </div>
                         <div class="account-info">
                             <div class="account-name">
                                 United Sector
-                                <svg class="verified-badge" viewBox="0 0 22 22">
-                                    <path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z"/>
+                                <svg class="verified-badge" viewBox="0 0 22 22" fill="none">
+                                    <circle cx="11" cy="11" r="11" fill="#1d9bf0"/>
+                                    <path d="M9.5 12.5L7.5 10.5L6.5 11.5L9.5 14.5L15.5 8.5L14.5 7.5L9.5 12.5Z" fill="white"/>
                                 </svg>
                             </div>
                             <div class="account-handle">@utdsectorx</div>
@@ -365,14 +355,16 @@
 
                     <div class="caption" id="captionPreview">Bruno giving his wisdom to Shea Lacey</div>
 
-                    <div class="video-container" id="videoContainer">
-                        <div class="video-placeholder" id="videoPlaceholder">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-                            </svg>
-                            <p>Upload a video to preview</p>
+                    <div class="video-wrapper">
+                        <div class="video-container" id="videoContainer">
+                            <div class="video-placeholder" id="videoPlaceholder">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                                </svg>
+                                <p>Upload a video to preview</p>
+                            </div>
+                            <video id="videoPreview" style="display: none;" loop muted playsinline></video>
                         </div>
-                        <video id="videoPreview" style="display: none;" controls loop></video>
                     </div>
                 </div>
             </div>
@@ -380,9 +372,9 @@
             <div class="tips">
                 <h3>Tips:</h3>
                 <ul>
-                    <li>Best video format: MP4, square (1:1) aspect ratio</li>
-                    <li>Keep captions short and engaging</li>
-                    <li>Screen record the preview for best quality export</li>
+                    <li>Best format: MP4, square (1:1) video</li>
+                    <li>Template is 9:16 with square video inside</li>
+                    <li>Screen record for best export quality</li>
                 </ul>
             </div>
         </div>
@@ -416,6 +408,18 @@
                 videoPreview.onloadeddata = function() {
                     videoPreview.play();
                 };
+            }
+        });
+
+        // Click video to play/pause
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.addEventListener('click', function() {
+            if (videoPreview.src && videoPreview.style.display !== 'none') {
+                if (videoPreview.paused) {
+                    videoPreview.play();
+                } else {
+                    videoPreview.pause();
+                }
             }
         });
     </script>
