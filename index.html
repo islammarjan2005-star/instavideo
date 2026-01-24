@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SyncView - AI-Powered Comparative Video Learning</title>
+  <meta name="description" content="Learn through multiple perspectives with AI-powered video comparison. Watch multiple YouTube videos intelligently interwoven into a single viewing experience.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+  <div id="app">
+    <!-- Home Page -->
+    <main id="home-page" class="page active">
+      <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+          <div class="logo">
+            <div class="logo-icon">✨</div>
+            <h1>SyncView</h1>
+          </div>
+          <p class="tagline">AI-Powered Comparative Video Learning</p>
+          <p class="description">
+            Watch multiple YouTube videos intelligently interwoven into a single viewing experience.
+            Compare perspectives, see explanations converge, and gain clearer understanding.
+          </p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section glass">
+          <h2>
+            <span class="icon">▶️</span>
+            Enter YouTube Videos to Compare
+          </h2>
+
+          <div class="topic-input">
+            <label>What topic are these videos about?</label>
+            <input type="text" id="topic-input" placeholder="e.g., 'Linear Regression', 'React Hooks', 'Game of Thrones ending'">
+          </div>
+
+          <div id="video-inputs" class="video-inputs">
+            <div class="video-input-row">
+              <input type="text" class="video-url" placeholder="Video 1 URL (youtube.com/watch?v=... or youtu.be/...)">
+              <span class="video-num">#1</span>
+            </div>
+            <div class="video-input-row">
+              <input type="text" class="video-url" placeholder="Video 2 URL (youtube.com/watch?v=... or youtu.be/...)">
+              <span class="video-num">#2</span>
+            </div>
+          </div>
+
+          <button id="add-video-btn" class="add-video-btn">
+            <span>+</span> Add Another Video (up to 6)
+          </button>
+
+          <div id="error-message" class="error-message"></div>
+
+          <button id="start-btn" class="start-btn">
+            <span>✨</span> Start Comparative View
+          </button>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="use-cases">
+          <h3>Perfect for</h3>
+          <div class="use-cases-grid">
+            <div class="use-case glass">
+              <span class="use-case-icon">📚</span>
+              <h4>Academic Learning</h4>
+              <p>Math, statistics, coding, economics - see multiple explanations converge</p>
+            </div>
+            <div class="use-case glass">
+              <span class="use-case-icon">💬</span>
+              <h4>Commentary & Debates</h4>
+              <p>Compare perspectives on reactions, discussions, and hot takes</p>
+            </div>
+            <div class="use-case glass">
+              <span class="use-case-icon">📈</span>
+              <h4>Sports Analysis</h4>
+              <p>Watch multiple analysts break down the same play or game</p>
+            </div>
+            <div class="use-case glass">
+              <span class="use-case-icon">⚡</span>
+              <h4>Tech Tutorials</h4>
+              <p>Learn from different teaching styles on the same concept</p>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <p>SyncView uses AI to analyze video transcripts and find alignment points.</p>
+          <p>Videos are embedded from YouTube - no content is downloaded.</p>
+        </footer>
+      </div>
+    </main>
+
+    <!-- Player Page -->
+    <main id="player-page" class="page">
+      <header class="player-header glass">
+        <button id="back-btn" class="back-btn">← Back</button>
+        <div class="header-info">
+          <h1 id="player-topic">Topic</h1>
+          <p id="player-video-count">0 videos compared</p>
+        </div>
+      </header>
+
+      <div class="player-container">
+        <div class="main-content">
+          <!-- Video Player -->
+          <div class="video-wrapper">
+            <div id="video-container" class="video-container">
+              <!-- YouTube iframes will be inserted here -->
+            </div>
+
+            <!-- Current Video Indicator -->
+            <div id="current-video-indicator" class="current-video-indicator glass">
+              <span class="indicator-dot"></span>
+              <span id="current-video-title">Video 1</span>
+            </div>
+
+            <!-- Segment Info -->
+            <div id="segment-info" class="segment-info glass">
+              <div class="segment-details">
+                <h3 id="segment-topic">Introduction</h3>
+                <p id="segment-description">Opening and topic introduction</p>
+              </div>
+              <div class="segment-time">
+                <p id="current-time">0:00</p>
+                <p id="segment-progress">Segment 1/5</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="controls glass">
+            <!-- Timeline -->
+            <div class="timeline-container">
+              <div id="timeline" class="timeline">
+                <!-- Segments will be rendered here -->
+              </div>
+              <div class="timeline-labels">
+                <div class="video-legend" id="video-legend"></div>
+              </div>
+              <div class="time-display">
+                <span id="elapsed-time">0:00</span>
+                <span id="total-time">0:00</span>
+              </div>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="playback-controls">
+              <div class="control-group">
+                <button id="prev-segment-btn" class="control-btn" title="Previous Segment">⏮</button>
+                <button id="play-pause-btn" class="control-btn play-btn" title="Play/Pause">▶</button>
+                <button id="next-segment-btn" class="control-btn" title="Next Segment">⏭</button>
+              </div>
+
+              <div class="control-group">
+                <button id="auto-switch-btn" class="control-btn toggle-btn active" title="Auto-switch between videos">
+                  <span>🔄</span> Auto-switch
+                </button>
+
+                <div class="volume-control">
+                  <button id="mute-btn" class="control-btn" title="Mute/Unmute">🔊</button>
+                  <input type="range" id="volume-slider" min="0" max="100" value="100">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Thumbnails -->
+          <div class="video-thumbnails glass">
+            <div class="thumbnails-header">
+              <h3>Compare Perspectives</h3>
+              <p>Click to switch videos</p>
+            </div>
+            <div id="thumbnails-grid" class="thumbnails-grid">
+              <!-- Thumbnails will be rendered here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <!-- Segments List -->
+          <div class="segments-list glass">
+            <h3>
+              <span>🔀</span> Segments
+            </h3>
+            <div id="segments-container" class="segments-container">
+              <!-- Segments will be rendered here -->
+            </div>
+          </div>
+
+          <!-- Insights -->
+          <div class="insights glass">
+            <button id="insights-toggle" class="insights-toggle">
+              <span>💡</span> AI Insights
+              <span class="toggle-arrow">▼</span>
+            </button>
+            <div id="insights-content" class="insights-content">
+              <div class="insight-section">
+                <h4 class="insight-title convergence">Points of Agreement</h4>
+                <ul id="convergence-points"></ul>
+              </div>
+              <div class="insight-section">
+                <h4 class="insight-title divergence">Different Perspectives</h4>
+                <ul id="divergence-points"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Keyboard Shortcuts -->
+          <div class="shortcuts glass">
+            <h3>Keyboard Shortcuts</h3>
+            <div class="shortcuts-grid">
+              <div><kbd>Space</kbd> Play/Pause</div>
+              <div><kbd>M</kbd> Mute</div>
+              <div><kbd>←</kbd> Prev segment</div>
+              <div><kbd>→</kbd> Next segment</div>
+              <div><kbd>A</kbd> Auto-switch</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="loading-content glass">
+        <div class="spinner"></div>
+        <h2>Preparing Your Experience</h2>
+        <p id="loading-status">Initializing...</p>
+        <div class="loading-bar">
+          <div class="loading-progress"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="app.js"></script>
+</body>
+</html>
